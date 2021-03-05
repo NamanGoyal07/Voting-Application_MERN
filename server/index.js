@@ -1,6 +1,8 @@
 const express = require('express');
+// const { errorHandler } = require('./handlers');
 const app = express();
 const port = 4000;
+const errorHandler = require('./handlers/index');
 
 app.get('/', (req,res) => {
     res.json({
@@ -9,18 +11,8 @@ app.get('/', (req,res) => {
 })
 
 // Error Handling
-app.use((req,res,next) => {
-    const err = new Error('Not found');
-    err.status = 404;
-
-    next(err);
-});
-
-app.use((err,req,res,next) => {
-    res.status(err.status || 500).json({
-    err: err.message || 'Something went wrong'
-    })
-});
+app.use(errorHandler.notFound);
+app.use(errorHandler.errors);
 
 app.listen(port,
     console.log(`Server startted in port ${port}`)
