@@ -10,6 +10,8 @@ const errorHandler = require('./handlers/index');
 app.use(cors());
 app.use(bodyParser.json());
 
+const db = require('./models/index');
+
 // Routes
 app.get('/', (req,res) => {
     res.json({
@@ -23,7 +25,7 @@ app.use(errorHandler.errors);
 
 // Server Listening
 app.listen(port,
-    console.log(`Server startted in port ${port}`)
+    console.log(`Server started in port ${port}`)
 );
 
 
