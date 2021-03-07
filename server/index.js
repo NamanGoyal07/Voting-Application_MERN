@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT;
 const errorHandler = require('./handlers/index');
+const routes = require('./routes');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -22,6 +23,7 @@ app.get('/', (req,res) => {
 // Error Handling
 app.use(errorHandler.notFound);
 app.use(errorHandler.errors);
+app.use('/api/auth',routes.auth);
 
 // Server Listening
 app.listen(port,
