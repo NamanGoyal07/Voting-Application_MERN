@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
+    created: {
+        type: Date,
+        default: Date.now()
+    },
+
     polls: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'polls'
